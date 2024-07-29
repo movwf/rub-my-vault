@@ -1,2 +1,2 @@
 # rub-my-vault
-Ruby
+Ruby Vault Server
