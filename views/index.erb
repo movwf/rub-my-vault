@@ -2,8 +2,73 @@
 <html>
 <head>
   <title>My Agoo App</title>
+  <script src="static/tailwind.js"></script>
+  <style>
+    .modal {
+      display: none;
+    }
+  </style>
 </head>
-<body>
-  <h1>Hello, <%= name %>!</h1>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-4">Password Vault</h1>
+
+     <div class="mb-4">
+      <label for="domain-search" class="block text-sm font-medium text-gray-700 mb-1">Search Domain:</label>
+      <input type="text" id="domain-search" placeholder="Search domain..." class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+    </div>
+
+    <!-- Multiple select for showing records -->
+    <div class="mb-4">
+      <label for="record-select" class="block text-sm font-medium text-gray-700 mb-1">Select Record:</label>
+      <select id="record-select" multiple class="w-full h-32 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+        <option>domain1.com - a@a.com</option>
+        <option>domain2.com - a@a.com</option>
+        <option>domain2.com - b@b.com</option>
+        <!-- Add more options here -->
+      </select>
+    </div>
+
+    <!-- Buttons for actions -->
+    <div class="flex justify-between space-x-2">
+      <button class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Show Password</button>
+      <button class="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">Add</button>
+      <button id="edit-button" class="bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">Edit</button>
+      <button class="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Delete</button>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal fixed inset-0 bg-gray-800 bg-opacity-50 items-center justify-center">
+      <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-xl font-bold mb-4">Edit Record</h2>
+        <div class="mb-4">
+          <label for="domain" class="block text-sm font-medium text-gray-700 mb-1">Domain:</label>
+          <input type="text" id="domain" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div class="mb-4">
+          <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username:</label>
+          <input type="text" id="username" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div class="mb-4">
+          <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password:</label>
+          <input type="password" id="password" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div class="flex justify-end space-x-2">
+          <button id="cancel-button" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Cancel</button>
+          <button class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('edit-button').addEventListener('click', function() {
+      document.getElementById('edit-modal').classList.add('flex');
+    });
+
+    document.getElementById('cancel-button').addEventListener('click', function() {
+      document.getElementById('edit-modal').classList.remove('flex');
+    });
+  </script>
 </body>
 </html>

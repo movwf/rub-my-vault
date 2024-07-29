@@ -5,6 +5,7 @@ require 'erb'
 
 require_relative 'routes'
 require_relative 'lib/render_handler'
+require_relative 'lib/static_handler'
 require_relative 'controllers/Home'
 
 Agoo::Server.init(6464, './root')
@@ -42,6 +43,7 @@ Agoo::Server.init(6464, './root')
 
 home_handler = Home.new()
 
+Agoo::Server.handle(:GET, '/static/*', StaticHandler.new())
 Agoo::Server.handle(:GET, '/', home_handler)
 
 Agoo::Server.start()
