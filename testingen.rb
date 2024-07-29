@@ -1,16 +1,11 @@
-require_relative 'routes'
+require 'bcrypt'
 
-all_routes = get_all_routes()
+require_relative 'setup_db'
+require_relative 'models/Password'
 
-home_routes = all_routes.reduce({}) do |acc, route|
-  method, controller, path, view = route.values_at(:method, :controller, :path, :view)
+new_pass = Password.create(domain: 'google.com',
+                           username: 'a@a.com',
+                           password: BCrypt::Password.create('123456'))
 
-  if controller == 'Home'
-    key = "#{method.to_s}::#{path.to_s}"
-    acc[key] = view
-  end
 
-  acc
-end
-
-puts home_routes
+new_pass.save
